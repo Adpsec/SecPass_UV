@@ -1,83 +1,81 @@
-public class HomeController : Controller // zona de registros del controlador
-    {
-        RepositoryHash repo;
-        public HomeController(RepositoryHash repo) { this.repo = repo; } 
-        public IActionResult Index()
-        {
-            return View();
-        } 
-        [HttpGet]
-        public IActionResult Registrar()
-        {
-          return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken] 
-        public IActionResult Registrar
-            (String name,String user,String pswd)
-        {
-            this.repo.InsertUser(name, user, pswd);
-            ViewData["MENSAJE"] = "Datos almacenados";
-            return View();
-        }
+public class HomeController extends Controller // zona de registros del controlador
+{
+		private RepositoryHash repo;
+		public HomeController(RepositoryHash repo)
+		{
+			this.repo = repo;
+		}
+		public final IActionResult Index()
+		{
+			return View();
+		}
+
+		public final IActionResult Registrar()
+		{
+		  return View();
+		}
+
+		public final IActionResult Registrar(String name, String user, String pswd)
+		{
+			this.repo.InsertUser(name, user, pswd);
+			ViewData["MENSAJE"] = "Datos almacenados";
+			return View();
+		}
 }
 //validacion de las credenciales
 
-using CypherHash.Models;
-using CypherHash.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
- 
-namespace CypherHash.Controllers
+import cypherhash.Models.*;
+import cypherhash.Repositories.*;
+
+
+package cypherhash.controllers;
+
+import cypherhash.Models.*;
+import cypherhash.Repositories.*;
+
+public class HomeController extends Controller
 {
-    public class HomeController : Controller
-    {
-        RepositoryHash repo;
-        public HomeController(RepositoryHash repo) { this.repo = repo; }
- 
-        public IActionResult Index()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult Registrar()
-        {
-          return View();
-        }
- 
- [HttpPost]
-[ValidateAntiForgeryToken] 
-        public IActionResult Registrar
-            (String name,String user,String pswd)
-        {
-            this.repo.InsertUser(name, user, pswd);
-            ViewData["MENSAJE"] = "Datos almacenados";
-            return View();
-        }
- 
-        [HttpGet]
-        public IActionResult Credentials()
-        {
-            return View();
-        }
-        [HttpPost]
-[ValidateAntiForgeryToken] 
-        public IActionResult Credentials(String username, String password)
-        {
-            Usuario user = this.repo.UserLogin(username, password);
-            if (user == null)
-            {
-                ViewData["MENSAJE"] = "Usuario/Password no válidos";
-            }
-            else
-            {
-                ViewData["MENSAJE"] =
-                "Credenciales correctas, Sr/Sra " + user.name;
-            }
-            return View();
-        }
-    }
+	private RepositoryHash repo;
+	public HomeController(RepositoryHash repo)
+	{
+		this.repo = repo;
+	}
+
+	public final IActionResult Index()
+	{
+		return View();
+	}
+
+	public final IActionResult Registrar()
+	{
+	  return View();
+	}
+
+
+ public final IActionResult Registrar(String name, String user, String pswd)
+ {
+		this.repo.InsertUser(name, user, pswd);
+		ViewData["MENSAJE"] = "Datos almacenados";
+		return View();
+ }
+
+
+	public final IActionResult Credentials()
+	{
+		return View();
+	}
+
+	public final IActionResult Credentials(String username, String password)
+	{
+		Usuario user = this.repo.UserLogin(username, password);
+		if (user == null)
+		{
+			ViewData["MENSAJE"] = "Usuario/Password no válidos";
+		}
+		else
+		{
+			ViewData["MENSAJE"] = "Credenciales correctas, Sr/Sra " + user.name;
+		}
+		return View();
+	}
 }
