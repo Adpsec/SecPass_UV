@@ -1,4 +1,4 @@
-using System;
+using System;     // se encaraga de comparar dos Arrays, que nos ayudara en el entorno de programacion
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
