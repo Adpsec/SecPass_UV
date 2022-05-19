@@ -1,4 +1,4 @@
-public class HomeController : Controller
+public class HomeController : Controller // zona de registros del controlador
     {
         RepositoryHash repo;
         public HomeController(RepositoryHash repo) { this.repo = repo; } 
@@ -21,6 +21,7 @@ public class HomeController : Controller
             return View();
         }
 }
+//validacion de las credenciales
 
 using CypherHash.Models;
 using CypherHash.Repositories;
