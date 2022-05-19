@@ -1,31 +1,70 @@
-[Table("CYPHERHASH")]
 
    public class Usuario
 
    {
 
-       [Key]
 
-       [DatabaseGenerated(DatabaseGeneratedOption.None)]
 
-       [Column(«IdUser»)]
 
-       public int idUser { get; set; }
 
-       [Column(«Nombre»)]
+	   private int idUser;
+	   public final int getIdUser()
+	   {
+		   return idUser;
+	   }
+	   public final void setIdUser(int value)
+	   {
+		   idUser = value;
+	   }
 
-       public string name { get; set; }
 
-       [Column(«Usuario»)]
 
-       public string user { get; set; }
+	   private String name;
+	   public final String getName()
+	   {
+		   return name;
+	   }
+	   public final void setName(String value)
+	   {
+		   name = value;
+	   }
 
-       [Column(«Pswd»)]
 
-       public byte[] pswd { get; set; }
 
-       [Column(«Salt»)]
+	   private String user;
+	   public final String getUser()
+	   {
+		   return user;
+	   }
+	   public final void setUser(String value)
+	   {
+		   user = value;
+	   }
 
-       public string salt { get; set; }
+
+
+	   private byte[] pswd;
+
+	   public final byte[] getPswd()
+	   {
+		   return pswd;
+	   }
+
+	   public final void setPswd(byte[] value)
+	   {
+		   pswd = value;
+	   }
+
+
+
+	   private String salt;
+	   public final String getSalt()
+	   {
+		   return salt;
+	   }
+	   public final void setSalt(String value)
+	   {
+		   salt = value;
+	   }
 
    }
