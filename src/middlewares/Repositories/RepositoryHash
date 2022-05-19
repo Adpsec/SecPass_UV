@@ -1,4 +1,4 @@
-using CypherHash.Data;
+using CypherHash.Data;   // se realizan las peticiones de la bbdd
 using CypherHash.Helpers;
 using CypherHash.Models;
 using System;
