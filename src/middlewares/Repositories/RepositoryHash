@@ -1,64 +1,67 @@
-using CypherHash.Data;   // se realizan las peticiones de la bbdd
-using CypherHash.Helpers;
-using CypherHash.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace CypherHash.Repositories {
-    public class RepositoryHash {
-        CypherHashContext context;
-        public RepositoryHash(CypherHashContext context) { 
-                 this.context = context; 
-        }
-        private int GetMaxIdUser(){
-            int query = 
-                            this.context.Usuarios.Max(x => x.idUser) + 1;
-            return query;
-        }
- 
-        public void InsertUser
-(int idEmp, string nombre, string username, string password){
-            Usuario user = new Usuario();
-           //user.idUser = GetMaxIdUser();
-        //en el 1º registro estamos obligados a meter el valor a cañón para que no nos falle el codigo en el metodo incremental
-            user.idUser = 1;
-         user.name = nombre;
-         user.user = username;
-         String salt = CypherService.GetSalt();
-         user.salt = salt;
-         byte[] respuesta = CypherService.CypherHashefficent(password, salt);
-         user.pswd = respuesta;
-         this.context.Usuarios.Add(user);
-         this.context.SaveChanges();
- }
+package cypherhash.repositories;
+
+import java.util.*;
+
+import cypherhash.Data.*; // se realizan las peticiones de la bbdd
+import cypherhash.Helpers.*;
+import cypherhash.Models.*;
+public class RepositoryHash
+{
+	private CypherHashContext context;
+	public RepositoryHash(CypherHashContext context)
+	{
+			 this.context = context;
+	}
+	private int GetMaxIdUser()
+	{
+		int query = this.context.Usuarios.Max(x -> x.idUser) + 1;
+		return query;
+	}
+
+	public final void InsertUser(int idEmp, String nombre, String username, String password)
+	{
+		Usuario user = new Usuario();
+	   //user.idUser = GetMaxIdUser();
+	//en el 1º registro estamos obligados a meter el valor a cañón para que no nos falle el codigo en el metodo incremental
+		user.idUser = 1;
+	 user.name = nombre;
+	 user.user = username;
+	 String salt = CypherService.GetSalt();
+	 user.salt = salt;
+
+	 byte[] respuesta = CypherService.CypherHashefficent(password, salt);
+	 user.pswd = respuesta;
+	 this.context.Usuarios.Add(user);
+	 this.context.SaveChanges();
+	}
 //Comparative credentials
-        public Usuario UserLogin(string UserName, string pswd)
-        {
-            Usuario user = 
-this.context.Usuarios.Where(z => z.user == UserName).FirstOrDefault();
-            if (user == null)
-            {
-                return null;
-            }
-            else
-            {
-                string salt = user.salt;
-            byte[] Pswdbbdd = user.pswd;
-          byte[] PswdTemporal = CypherService.CypherHashefficent(pswd, salt);
-          bool answer = ToolKit.ArraysComparative(Pswdbbdd, PswdTemporal);
-                if (answer == true)
-                {
-                    return user;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-        public List<Usuario> GetUsuarios()
-        {
-            return this.context.Usuarios.ToList();
-        }
-    }
+	public final Usuario UserLogin(String UserName, String pswd)
+	{
+		Usuario user = this.context.Usuarios.Where(z = UserName.equals(> z.user)).FirstOrDefault();
+		if (user == null)
+		{
+			return null;
+		}
+		else
+		{
+			String salt = user.salt;
+
+		byte[] Pswdbbdd = user.pswd;
+
+	  byte[] PswdTemporal = CypherService.CypherHashefficent(pswd, salt);
+	  boolean answer = ToolKit.ArraysComparative(Pswdbbdd, PswdTemporal);
+			if (answer == true)
+			{
+				return user;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
+	public final ArrayList<Usuario> GetUsuarios()
+	{
+		return this.context.Usuarios.ToList();
+	}
 }

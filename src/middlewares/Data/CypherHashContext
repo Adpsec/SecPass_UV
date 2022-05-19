@@ -1,10 +1,19 @@
-namespace CifradoHash.Data
+package cifradohash.data;
+
+public class CypherHashContext extends DbContext
 {
-    public class CypherHashContext:DbContext
-    {
-        public CypherHashContext
-       (DbContextOptions<CypherHashContext> options) : base(options) { }
- 
-        public DbSet<Usuario> Usuarios { get; set; }
-    }
+	public CypherHashContext(DbContextOptions<CypherHashContext> options)
+	{
+		super(options);
+	}
+
+	private DbSet<Usuario> Usuarios;
+	public final DbSet<Usuario> getUsuarios()
+	{
+		return Usuarios;
+	}
+	public final void setUsuarios(DbSet<Usuario> value)
+	{
+		Usuarios = value;
+	}
 }
