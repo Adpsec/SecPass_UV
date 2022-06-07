@@ -1,0 +1,70 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package log_of_actions;
+
+/**
+ *
+ * @author MC
+ */
+public class Log_of_actionss {
+   private String id_log;
+     private String id_action;
+    private String id_user;
+    private String date_log;
+
+    public Log_of_actionss(String id, String a, String b, String c){
+        id_log = id;
+        id_action = a;
+        id_user = b;
+        date_log = c;
+        
+    };
+
+    //Los getters y setters son solo guías
+    
+    public void getId_log(){
+        
+    };
+    
+    public void setId_log(){
+        
+        
+    };
+    public void getId_action(){
+
+    };
+
+    public void setId_action(){
+        
+    };
+
+    public void getaction(){
+        
+    };
+
+    public void setaction(){
+        
+    };
+    
+    public void getId_user(){
+        
+    };
+    
+    public void setId_user(){
+        
+        
+    };
+    
+    public void getdate_log(){
+        
+    };
+    
+    public void setdate_log(){
+        
+        
+    };
+
+};
